@@ -25,4 +25,10 @@ class RoundTest extends TestCase
         $this->assertEquals('123', $result->value);
     }
 
+    public function testRoundScaleZero()
+    {
+        $result = Money::make('4.57', 0);
+        $this->assertEquals('5', $result->value);
+    }
+
 }

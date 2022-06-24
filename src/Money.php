@@ -31,7 +31,6 @@ class Money
     {
         // This will throw an error if the value is not valid
         if ($round) {
-            $wtf = bcscale();
             $roundScale = $scale ?? bcscale();
             $this->value = bcadd($value, '0', $roundScale + 1);
             $this->value = $this->roundResult($this->value, $roundScale);
@@ -340,8 +339,12 @@ class Money
         $last = substr($value, $dot + $scale + 1, 1);
         $lastDig = $last === '' ? 0 : (int)$last;
         if ($lastDig >= 5) {
-            $increment = (self::isNegative($value) ? '-0.' : '0.')
-                . str_repeat('0', $scale - 1) . '1';
+            if ($scale) {
+                $increment = (self::isNegative($value) ? '-0.' : '0.')
+                    . str_repeat('0', $scale - 1) . '1';
+            } else {
+                $increment = self::isNegative($value) ? '-1.' : '1.';
+            }
             $value = bcadd($value, $increment, $scale);
         } else {
             $length = $dot + $scale + ($scale ? 1 : 0);
