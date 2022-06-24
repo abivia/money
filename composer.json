@@ -1,7 +1,7 @@
 {
   "name": "abivia/money",
   "type": "library",
-  "description": "Support for working with monetary values.",
+  "description": "Library for working with monetary values, a BCMath library with rounding support.",
   "keywords": [
     "abivia",
     "accounting",
