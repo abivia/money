@@ -33,6 +33,5 @@ echo Money::make('35.04')->div('1.15');
 30.47
 ```
 
-outputs ``.
 
 
