@@ -115,12 +115,12 @@ class Money
     /**
      * Compare this value to the operand and return 1 if the operand is greater, -1 if less, and 0
      * if equal.
-     * @param Money|string $operand
+     * @param Money|string $operand Defaults to zero.
      * @param int|null $scale
      * @param bool $round
      * @return int
      */
-    public function comp(Money|string $operand, ?int $scale = null, bool $round = true): int
+    public function comp(Money|string $operand = '0', ?int $scale = null, bool $round = true): int
     {
         if (!$operand instanceof static) {
             $operand = static::make($operand, $scale, $round);
@@ -351,6 +351,17 @@ class Money
             $value = substr($value . str_repeat('0', $scale), 0, $length);
         }
         return $value;
+    }
+
+    /**
+     * Get the minimum significant value for a scale.
+     * @param int|null $scale
+     * @return static
+     */
+    public static function quantum(?int $scale = null): static
+    {
+        $value = $scale ? ('0.' . str_repeat('0', $scale - 1) . '1') : '1';
+        return static::make($value, $scale);
     }
 
     /**
