@@ -47,7 +47,7 @@ class Money
      * @param $name
      * @return mixed
      */
-    public function __get($name)
+    public function __get($name): mixed
     {
         return $this->$name;
     }
