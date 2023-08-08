@@ -5,6 +5,16 @@ use Abivia\Money\Money;
 
 class CompTest extends TestCase
 {
+    public function testCompDefault()
+    {
+        $result = Money::make('0.0')->comp();
+        $this->assertEquals(0, $result);
+        $result = Money::make('35.04')->comp();
+        $this->assertEquals(1, $result);
+        $result = Money::make('-35.04')->comp();
+        $this->assertEquals(-1, $result);
+    }
+
     public function testCompLess()
     {
         $result = Money::make('35.04')->comp('100');
